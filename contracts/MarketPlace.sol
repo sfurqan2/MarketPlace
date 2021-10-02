@@ -21,7 +21,7 @@ contract MarketPlace{
     }
 
     function createBuyRequest(string memory name, uint price) public payable {
-        require(msg.value == price, "Invalid transaction price greater than transaction amount!");
+        require(msg.value >= price, "Invalid transaction price greater than transaction amount!");
         for( uint i = 0; i < items.length; i++){
             if(keccak256(bytes(items[i].name)) == keccak256(bytes(name)) && items[i].price == price){
                 require(sellRequest[i], "Product has already been sold!");
